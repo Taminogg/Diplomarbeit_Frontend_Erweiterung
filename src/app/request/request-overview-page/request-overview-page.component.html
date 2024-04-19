@@ -20,7 +20,6 @@
   <label>Filter:&nbsp;</label>
   <select #currFilter (change)="setSelectedFilter(currFilter.value)">
     <option value="customername">{{'customer' | transloco}}</option>
-    <option value="status">{{'status' | transloco}}</option>
     <option value="lastUpdated">{{'last-updated' | transloco}}</option>
     @if (htmlContent === 'containerRequestCS') {
     <option value="approvedByCs">{{'approved-by-cs' | transloco}}</option>

@@ -193,6 +193,14 @@ export class DataService {
             this.getDetailsForOrder(x);
           });
         break;
+
+        case "country":
+        console.log('case country');
+        this.orderService.ordersCountryGet(value)
+          .subscribe(x => {
+            this.getDetailsForOrder(x);
+          });
+        break;
       //case "approvedByCs":
       //  console.log('case approvedByCs ' + JSON.parse(value));
       //  this.orderService.ordersGet()
