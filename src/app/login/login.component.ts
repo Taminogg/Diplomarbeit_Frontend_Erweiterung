@@ -1,130 +1,4 @@
 
-//region "Verworfen"
-
-// import { Component, OnInit, inject } from '@angular/core';
-// import { Router } from '@angular/router';
-// import { CommonModule } from '@angular/common';
-// import { TranslocoModule } from '@ngneat/transloco';
-
-// @Component({
-//   selector: 'app-login',
-//   standalone: true,
-//   imports: [CommonModule, TranslocoModule],
-//   templateUrl: './login.component.html',
-//   styleUrls: ['./login.component.scss']
-// })
-// export class LoginComponent implements OnInit {
-//   loading: boolean = false;
-
-//   constructor(private router: Router) {}
-
-//   ngOnInit() {
-//   }
-
-//   tryLogin() {
-//     this.loading = true;
-//     setTimeout(() => {
-//       this.router.navigateByUrl("/function-overview");
-//       this.loading = false;
-//     }, 4000); // Simuliere einen Login-Prozess mit einer Verzögerung
-//   }
-
-//   trySignUp() {
-//     this.loading = true;
-//     setTimeout(() => {
-//       this.router.navigateByUrl("/function-overview");
-//       this.loading = false;
-//     }, 4000); // Simuliere einen Registrierungsprozess mit einer Verzögerung
-//   }
-// }
- // tryLogin(): void {
-  //   this.loading = true;
-  //   this.authService.login(this.username(), this.email(), this.password()).subscribe({
-  //     next: (response) => {
-  //       // Hier könntest du den JWT-Token speichern und/oder den Nutzer navigieren
-  //       console.log(response);
-  //       this.router.navigateByUrl("/function-overview");
-  //     },
-  //     error: (error) => {
-  //       console.error('Login fehlgeschlagen:', error);
-  //     },
-  //     complete: () => this.loading = false
-  //   });
-  // }
-
-  // trySignUp(): void {
-  //   this.loading = true;
-  //   this.authService.signUp(this.username(), this.email(), this.password()).subscribe({
-  //     next: (response) => {
-  //       console.log('Registrierung erfolgreich', response);
-  //       // Eventuell nach erfolgreicher Registrierung automatisch einloggen oder eine Bestätigungsnachricht anzeigen
-  //       this.router.navigateByUrl("/function-overview");
-  //     },
-  //     error: (error) => {
-  //       console.error('Registrierung fehlgeschlagen:', error);
-  //     },
-  //     complete: () => this.loading = false
-  //   });
-  // }
-
-//   tryLogin(): void {
-//     this.loading = true;
-//     this.authService.login(this.username(), this.email(), this.password()).subscribe({
-//       next: (response) => {
-//         this.router.navigateByUrl("/function-overview");
-//       },
-//       error: (error) => {
-//         this.errorMessage.set('Login fehlgeschlagen.');
-//         this.loading = false;
-//       }
-//     });
-// }
-
-// trySignUp(): void {
-//     this.loading = true;
-//     this.authService.signUp(this.username(), this.email(), this.password()).subscribe({
-//       next: (response) => {
-//         this.router.navigateByUrl("/function-overview");
-//       },
-//       error: (error) => {
-//         if(error.status === 400) {
-//           this.errorMessage.set('E-Mail bereits verwendet.');
-//         } else {
-//           this.errorMessage.set('Registrierung fehlgeschlagen.');
-//         }
-//         this.loading = false;
-//       }
-//     });
-// }
-
-// tryLogin(): void {
-//   this.loading = true;
-//   this.authService.login(this.username(), this.email(), this.password()).subscribe({
-//       next: (response) => {
-//           // Erfolgreiche Anmeldung
-//           this.router.navigateByUrl("/function-overview");
-//       },
-//       error: (error) => {
-//           this.errorMessage.set("Deine Fehlermeldung hier"); // Setze eine spezifische Fehlermeldung
-//           this.loading = false;
-//       }
-//   });
-// }
-
-// trySignUp(): void {
-//   this.loading = true;
-//   this.authService.signUp(this.username(), this.email(), this.password()).subscribe({
-//       next: (response) => {
-//           // Erfolgreiche Registrierung
-//           this.router.navigateByUrl("/function-overview");
-//       },
-//       error: (error) => {
-//           this.errorMessage.set("Deine Fehlermeldung hier"); // Setze eine spezifische Fehlermeldung
-//           this.loading = false;
-//       }
-//   });
-// }
-//#endregion "Verworfen"
 import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -181,63 +55,21 @@ export class LoginComponent {
     return isValid;
   }
 
-  // trySignUp(): void {
-  //   if (this.validateInputs()) {
-  //     this.loading = true;
-  //     this.authService.signUp(this.username(), this.email(), this.password()).subscribe({
-  //       next: (response) => {
-  //         this.router.navigateByUrl("/function-overview");
-  //       },
-  //       error: (error) => {
-  //         this.errorMessage.set("Email bereits in Verwendung");
-  //         this.loading = false;
-  //         setTimeout(() => this.errorMessage.set(""), 5000);
-  //       }
-  //     });
-  //   }
-  // }
-//   trySignUp(): void {
-//     if (this.validateInputs()) {
-//         this.loading = true;
-//         this.authService.signUp(this.username(), this.email(), this.password()).subscribe({
-//             next: (response) => {
-//                 // Erfolgreiche Registrierung
-//                 this.router.navigateByUrl("/function-overview");
-//             },
-//             error: (error) => {
-//                 if (error.status === 400) {
-//                     // Annahme: Der Fehler-Response enthält einen Body mit einer Fehlermeldung
-//                     // Du musst eventuell den Pfad anpassen, je nachdem wie deine API den Fehler zurückgibt
-//                     this.errorMessage.set(error.error.message || "Email wird bereits verwendet");
-//                 } else {
-//                     this.errorMessage.set("Registrierung fehlgeschlagen.");
-//                 }
-//                 this.loading = false;
-//                 setTimeout(() => this.errorMessage.set(""), 5000);
-//             }
-//         });
-//     }
-// }
 
 trySignUp(): void {
   if (this.validateInputs()) {
     this.loading = true;
     this.authService.signUp(this.username(), this.email(), this.password()).subscribe({
       next: (response) => {
-        // Erfolgreiche Registrierung, Nutzer zur Überblicksseite weiterleiten
         this.router.navigateByUrl("/function-overview");
       },
       error: (error) => {
-        // Hier prüfen wir auf spezifische Fehlercodes und setzen entsprechende Fehlermeldungen
         if (error.status === 400) {
-          // Annahme: Der Fehler-Response enthält eine spezifische Fehlermeldung
           this.errorMessage.set(error.error.message || "Email wird bereits verwendet.");
         } else {
-          // Für alle anderen Fehler zeigen wir eine allgemeine Fehlermeldung
           this.errorMessage.set("Registrierung fehlgeschlagen. Bitte versuche es später erneut.");
         }
         this.loading = false;
-        // Fehlermeldung nach 5 Sekunden automatisch zurücksetzen
         setTimeout(() => this.errorMessage.set(""), 5000);
       }
     });
@@ -249,13 +81,12 @@ trySignUp(): void {
     this.loading = true;
     this.authService.login(this.username(), this.email(), this.password()).subscribe({
         next: (response) => {
-            // Erfolgreiche Anmeldung
             this.router.navigateByUrl("/function-overview");
         },
         error: (error) => {
-            this.errorMessage.set("Email oder Password falsch"); // Setze eine spezifische Fehlermeldung
+            this.errorMessage.set("Email oder Password falsch"); 
             this.loading = false;
-            setTimeout(() => this.errorMessage.set(""), 10000); // Lösche die Fehlermeldung nach 5 Sekunden
+            setTimeout(() => this.errorMessage.set(""), 10000);
         }
     });
   }

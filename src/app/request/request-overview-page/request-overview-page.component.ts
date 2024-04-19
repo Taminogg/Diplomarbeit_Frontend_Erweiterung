@@ -112,11 +112,12 @@ export class ContainerRequestPageComponent implements OnInit, OnChanges {
 
   setSelectedFilter(value: string) {
     this.filterValue.set('');
-    this.dataService.refreshPage(this.selectedFilter(), this.filterValue(), this.htmlContent, this.filterByName(), this.showFinished(), this.showCanceled());
 
     this.selectedFilter.set(value);
     if (this.selectedFilter() === 'approvedByPp' || this.selectedFilter() === 'approvedByCs' || this.selectedFilter() === 'approvedByTl' || this.selectedFilter() === 'approvedByPpCs') {
       this.dataService.refreshPage(this.selectedFilter(), 'false', this.htmlContent, this.filterByName(), this.showFinished(), this.showCanceled());
+    }else{
+      this.dataService.refreshPage(this.selectedFilter(), this.filterValue(), this.htmlContent, this.filterByName(), this.showFinished(), this.showCanceled());
     }
   }
 

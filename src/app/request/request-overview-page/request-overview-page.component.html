@@ -54,7 +54,7 @@
     }
     @if (selectedFilter() === 'approvedByCs' || selectedFilter() ===
     'approvedByTl' || selectedFilter() === 'approvedByPp' || selectedFilter() === 'approvedByPpCs') {
-    <div><!--Checkbox-->
+    <div>
       <input (change)="filterOrders()" [ngSignal]="filterValue" type="checkbox">
     </div>
     }
