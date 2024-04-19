@@ -1,0 +1,332 @@
+// table {
+//   border-collapse: collapse;
+//   width: 110%;
+
+//   tr {
+//     &:nth-child(even) {
+//       background-color: #f2f2f2;
+//     }
+
+//     &:hover {
+//       background-color: #ddd;
+//     }
+
+//     td {
+//       padding: 8px;
+//       border: 1px solid #ddd;
+//       text-align: left;
+
+//       &.selected {
+//         background-color: #4CAF50;
+//         color: white;
+//       } 
+//     }
+//   }
+
+//   hr {
+//     border: 1px solid #f2f2f2;
+//   }
+
+//   label {
+//     margin-top: 10px;
+//     display: block;
+//   }
+
+//   input {
+//     margin-bottom: 10px;
+//     padding: 8px;
+//     border: 1px solid #ccc;
+//     border-radius: 4px;
+//     box-sizing: border-box;
+//   }
+// }
+
+// .table-row {
+//   display: flex;
+//   justify-content: space-between;
+//   margin-bottom: 15px;
+//   margin-top: 15px;
+// }
+
+// .table-group {
+//   flex: 1;
+//   margin-right: 10%;
+//   min-height: 250px;
+// }
+
+// .container {
+//   margin: 20px;
+// }
+
+// button {
+//   cursor: pointer;
+//   background-color: #008CBA;
+//   border: none;
+//   color: white;
+//   padding: 5px 10px;
+//   text-align: center;
+//   text-decoration: none;
+//   display: inline-block;
+//   font-size: 14px;
+//   margin: 4px 2px;
+//   transition-duration: 0.4s;
+
+//   &:hover {
+//     background-color: #005f79;
+//   }
+
+//   &:disabled {
+//     opacity: 0.5;
+//     cursor: not-allowed;
+//   }
+// }
+
+// .row {
+//   display: flex;
+//   justify-content: space-between;
+// }
+
+// .group {
+//   flex: 1;
+// }
+
+// input{
+//   margin-left: 10px;
+// }
+
+// .selected {
+//   background-color: #4CAF50;
+//   color: white;
+// } 
+
+// #optionsBox{
+//   display: inline-grid;
+//   border-radius: 10px;
+//   width: fit-content;
+//   padding: 20px;
+//   margin: 30px;
+//   border: 2px solid white;
+//   min-width: 300px;
+// }
+
+#optionsBox{
+  position: relative;
+  display: inline-grid;
+  border-radius: 10px;
+  width: fit-content;
+
+  padding: 20px;
+  padding-top: 40px; /* Erhöht den oberen Abstand für den Titel */
+  margin: 30px;
+  border: 2px solid white;
+  min-width: 600px;
+}
+
+#optionsBox::before {
+  content: 'Filter'; /* Titel der OptionsBox */
+  position: absolute;
+  top: -15px; /* Positioniert den Titel über dem oberen Rand */
+  left: 20px; /* Horizontale Position */
+  background-color: rgb(20, 20, 20); /* Hintergrundfarbe des Titels */
+  color: white; /* Textfarbe */
+  padding: 0 10px; /* Innerer Abstand */
+  border-radius: 5px; /* Rundet die Ecken des Titel-Containers */
+  font-size: 20px; /* Größere Schrift */
+  font-weight: bold;
+}
+
+h3{
+  color: white;
+}
+
+hr, label{
+  color: white;
+}
+
+select{
+  border-radius: 10px;
+  width: 100%;
+  background-color: rgb(20, 20, 20);
+  color: white;
+  border: none;
+  outline: 2px solid white;
+  height: 35px;
+}
+
+#dateBox{
+  display: flex;
+  flex-direction: column;
+}
+
+#dateInput{
+  border-radius: 10px;
+  color: white;
+  width: 100%;
+  height: 35px;
+  border: none;
+  outline: 2px solid white;
+  padding: 5px;
+  background-color: rgb(20, 20, 20);
+}
+
+#dateInput::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+#tableBox{
+  position: relative;
+  display: inline-grid;
+  border-radius: 10px;
+  width: fit-content;
+  padding: 20px;/* Erhöht den oberen Abstand für den Titel */
+  margin: 30px;
+  border: 2px solid white;
+  min-width: 300px;
+}
+
+#tableBox::before {
+  content: 'Order'; /* Titel der TableBox */
+  position: absolute;
+  top: -15px; /* Positioniert den Titel über dem oberen Rand */
+  left: 20px; /* Horizontale Position */
+  background-color: rgb(20, 20, 20); /* Hintergrundfarbe des Titels */
+  color: white; /* Textfarbe */
+  padding: 0 10px; /* Innerer Abstand */
+  border-radius: 5px; /* Rundet die Ecken des Titel-Containers */
+  font-size: 20px; /* Größere Schrift */
+  font-weight: bold;
+}
+
+table{
+  border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+
+}
+
+th{
+  background-color: rgb(53, 53, 53);
+}
+
+th, td {
+  border: 1px solid white;
+  color: white;
+  margin: 10px;
+  padding: 5px;
+  text-align: left;
+}
+
+thead th{
+  width: 25%;
+}
+
+#checklistBox{
+  position: relative;
+  display: inline-grid;
+  border-radius: 10px;
+  width: fit-content;
+  padding: 20px;/* Erhöht den oberen Abstand für den Titel */
+  margin: 30px;
+  border: 2px solid white;
+  min-width: 300px;
+}
+
+#checklistBox::before {
+  content: 'Checklist'; /* Titel der TableBox */
+  position: absolute;
+  top: -15px; /* Positioniert den Titel über dem oberen Rand */
+  left: 20px; /* Horizontale Position */
+  background-color: rgb(20, 20, 20); /* Hintergrundfarbe des Titels */
+  color: white; /* Textfarbe */
+  padding: 0 10px; /* Innerer Abstand */
+  border-radius: 5px; /* Rundet die Ecken des Titel-Containers */
+  font-size: 20px; /* Größere Schrift */
+  font-weight: bold;
+}
+
+#pageBox {
+  display: flex; /* Macht pageBox zu einem Flex-Container */
+  justify-content: space-between; /* Verteilt die Kinder gleichmäßig im Container */
+  align-items: flex-start; /* Ausrichtung der Kinder am Anfang der Flex-Container */
+  padding: 30px; /* Fügt etwas Platz innerhalb der pageBox hinzu */
+}
+
+#optionsBox, #tableBox, #checklistBox {
+  flex: 1; /* Erlaubt jedem Kind, den verfügbaren Raum gleichmäßig zu füllen */
+  margin: 0 10px; /* Fügt horizontalen Abstand zwischen den Boxen hinzu */
+  /* min-width: 300px; Entferne oder passe diese Zeile an, falls nötig */
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+#checklistTable{
+  width: 100%;
+}
+
+#addChecklistBtn{
+  margin-top: 10px;
+  background-color: rgb(20, 20, 20);
+  color: white;
+  border: 2px solid white;
+  width: 100%;
+  border-radius: 10px;
+}
+
+#addChecklistBtn:hover{
+  background-color: white;
+  color: rgb(20, 20, 20);
+}
+
+#checklistTableContainer {
+  max-height: 150px; /* Angenommene Höhe für drei Zeilen, passen Sie diesen Wert entsprechend an */
+  overflow-y: auto; /* Macht den Container scrollbar, wenn der Inhalt die max-height überschreitet */
+  border: 1px solid #cccccc; /* Optional: Fügt einen Rahmen hinzu, um den Container sichtbar zu machen */
+}
+
+.stickyHeader th {
+  position: sticky;
+  top: 0;
+  background-color: rgb(53, 53, 53); /* oder Ihre bevorzugte Hintergrundfarbe */
+  z-index: 2;
+}
+
+#checklistTaskTable{
+  width: 100%;
+}
+
+#inputField{
+  display: flex;
+  justify-content: space-between;
+}
+
+#inputField input{
+  width: 66%;
+  border-radius: 10px;
+}
+
+#inputField label{
+  width: 33%;
+}
+
+#inputFieldButtons{
+  display: flex;
+  justify-content: space-between;
+}
+
+#inputFieldButtons button{
+  margin-top: 10px;
+  width: 45%;
+  background: rgb(20, 20, 20);
+  color: white;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+#inputFieldButtons button:hover{
+  width: 45%;
+  background-color: white;
+  color: rgb(20, 20, 20);
+}

@@ -1,0 +1,259 @@
+<!-- <div class="container">
+
+    <div class="table-row">
+        <div class="table-group">
+            <table>
+                <tr>
+                    <td>{{'checklist-name' | transloco}}</td>
+                </tr>
+                @for (checklist of allChecklists(); track $index) {
+                <tr>
+                    @if (selectedChecklistId() == checklist.id) {
+                    <td class="selected" (click)="showStepsForChecklist(checklist.id)">{{checklist.checklistname}}</td>
+                    }@else {
+                    <td (click)="showStepsForChecklist(checklist.id)">{{checklist.checklistname}}</td>
+                    }
+                </tr>
+                }
+            </table>
+            <hr>
+            <label>{{'checklist-name' | transloco}}</label>
+            <input type="text" [ngSignal]="checklistName">
+            <br>
+            <button (click)="postChecklist()">{{'add-checklist' | transloco}}</button>
+        </div>
+        <div class="table-group">
+            @if (selectedChecklistId() !== -1) {
+            <table>
+                <tr>
+                    <td>{{'step-number' | transloco}}</td>
+                    <td>{{'step-name' | transloco}}</td>
+                    <td>{{'step-description' | transloco}}</td>
+                </tr>
+                @for (step of allStepsForChecklist(); track $index) {
+                <tr>
+                    @if (selectedStepId() === step.id) {
+                    <td class="selected" (click)="setSelectedStep(step.id)">{{step.stepNumber}}</td>
+                    <td class="selected" (click)="setSelectedStep(step.id)">{{step.stepName}}</td>
+                    <td class="selected" (click)="setSelectedStep(step.id)">{{step.stepDescription}}</td>
+                    }@else{
+                    <td (click)="setSelectedStep(step.id)">{{step.stepNumber}}</td>
+                    <td (click)="setSelectedStep(step.id)">{{step.stepName}}</td>
+                    <td (click)="setSelectedStep(step.id)">{{step.stepDescription}}</td>
+                    }
+                </tr>
+                }
+            </table>
+
+            <br>
+            <div class="row">
+                <div class="group">
+                    <label>{{'step-number' | transloco}}</label>
+                    <input [ngSignal]="stepNumber" type="number" min="1">
+                </div>
+            </div>
+            <div class="row">
+                <div class="group">
+                    <label>{{'step-name' | transloco}}</label>
+                    <input [ngSignal]="stepName" type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="group">
+                    <label>{{'step-description' | transloco}}</label>
+                    <input [ngSignal]="stepDescription" type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="group">
+                    <button (click)="postStep()">{{'add-step' | transloco}}</button>
+                    <button [disabled]="selectedStepId() === -1" (click)="editStep()">{{'edit' | transloco}}</button>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div> -->
+
+<div id="pageBox">
+    <div id="optionsBox">
+        <div id="selectOption">
+            <h3>{{'type' | transloco}}</h3>
+            <select (change)="updateOrders()" [ngSignal]="selectedFilter">
+                <option value="CR">ContainerAnfrage</option>
+                <option value="PP">ProduktionsPlanung</option>
+            </select>
+        </div>
+        <hr>
+        <div id="selectOption">
+            <h3>{{'date' | transloco}}</h3>
+            <div id="dateBox">
+                <div>
+                    <label>{{'from' | transloco}}</label>
+                <input id="dateInput" (change)="updateOrders()" [ngSignal]="fromDate" format="dd.MM.yyyy" type="date">
+                </div>
+                <div>
+                    <label>{{'to' | transloco}}</label>
+                <input id="dateInput" (change)="updateOrders()" [ngSignal]="toDate" format="dd.MM.yyyy" type="date">
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+    
+    <div id="tableBox">
+        @if (allOrders().length > 0) {
+            <table>
+                <tr>
+                    @if(selectedFilter() === 'CR'){
+                    <th>{{'ab-nr' | transloco}}</th>
+                    }@else {
+                    <th>{{'pp-id' | transloco}}</th>
+                    }
+                    @if(selectedFilter() === 'CR'){
+                    <th>{{'time-to-approve-tl' | transloco}}</th>
+                    }@else {
+                    <th>{{'time-to-approve-pp' | transloco}}</th>
+                    }
+                    <th>{{'time-to-finish' | transloco}}</th>
+                    <th>{{'messages-for-order' | transloco}}</th>
+                    <th>{{'files-for-order' | transloco}}</th>
+                </tr>
+        
+                @for (order of filteredOrders(); track $index) {
+                <tr>
+                    @if(selectedFilter() === 'CR'){
+                    <td>{{getAbNumberForOrder(order.id)}}</td>
+                    }@else {
+                    <td>{{order.ppId}}</td>
+                    }
+                    @if(selectedFilter() === 'CR'){
+                    <td>{{getTimeForApprovedByTl(order.id)}}
+                        @if (!getTimeForApprovedByTl(order.id).includes('data')) {
+                            {{'days' | transloco}}
+                        }
+                        </td>
+                    }@else {
+                    <td>{{getTimeForApprovedByPp(order.id)}} 
+                        @if (!getTimeForApprovedByPp(order.id).includes('data')) {
+                            {{'days' | transloco}}
+                        }
+                    </td>
+                    }
+                    <td>{{getTimeForFinished(order.id)}}
+                        @if (!getTimeForFinished(order.id).includes('data')) {
+                            {{'days' | transloco}}
+                        }
+                        </td>
+                    <td>{{getCountForOrder(order.id, 'messages')}}</td>
+                    <td>{{getCountForOrder(order.id, 'files')}}</td>
+                </tr>
+                }
+        
+                <tr>
+                    <td>{{'avg' | transloco}}</td>
+                    <td>
+                        @if (selectedFilter() === 'CR') {
+                        {{getAvgTimeToGetApprovedBy('tl')}}
+                        }@else {
+                        {{getAvgTimeToGetApprovedBy('pp')}}
+                        }
+                        {{'days' | transloco}}</td>
+                    <td>{{getAvgTimeToFinsish()}} {{'days' | transloco}}</td>
+                    <td>{{getAvgForOrder('messages')}}</td>
+                    <td>{{getAvgForOrder('files')}}</td>
+                </tr>
+            </table>
+            }@else {
+            <br>
+            <label>{{'no-orders-found' | transloco}}</label>
+            }
+    </div>
+    <div id="checklistBox">
+        <div class="table-row">
+            <div class="table-group"> 
+                <div id="checklistTableContainer">
+                    <table id="checklistTable" class="stickyHeader">
+                        <thead>
+                            <tr>
+                                <th>{{'checklist-name' | transloco}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @for (checklist of allChecklists(); track $index) {
+                            <tr>
+                                @if (selectedChecklistId() == checklist.id) {
+                                <td class="selected" (click)="showStepsForChecklist(checklist.id)">{{checklist.checklistname}}</td>
+                                }@else {
+                                <td (click)="showStepsForChecklist(checklist.id)">{{checklist.checklistname}}</td>
+                                }
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div> <!--Reset Point -->
+                    <div id="inputField">
+                        <label id="checklistName">{{'checklist-name' | transloco}}</label>
+                        <input id="checklistNameTxt" type="text" [ngSignal]="checklistName">
+                    </div>
+                    <button id="addChecklistBtn" (click)="postChecklist()">{{'add-checklist' | transloco}}</button>
+                </div>
+            </div>
+            <div class="table-group"> 
+                <hr>
+                @if (selectedChecklistId() !== -1) {
+                <table id="checklistTaskTable">
+                    <tr>
+                        <th>{{'step-number' | transloco}}</th>
+                        <th>{{'step-name' | transloco}}</th>
+                        <th>{{'step-description' | transloco}}</th>
+                    </tr>
+                    @for (step of allStepsForChecklist(); track $index) {
+                    <tr>
+                        @if (selectedStepId() === step.id) {
+                        <td class="selected" (click)="setSelectedStep(step.id)">{{step.stepNumber}}</td>
+                        <td class="selected" (click)="setSelectedStep(step.id)">{{step.stepName}}</td>
+                        <td class="selected" (click)="setSelectedStep(step.id)">{{step.stepDescription}}</td>
+                        }@else{
+                        <td (click)="setSelectedStep(step.id)">{{step.stepNumber}}</td>
+                        <td (click)="setSelectedStep(step.id)">{{step.stepName}}</td>
+                        <td (click)="setSelectedStep(step.id)">{{step.stepDescription}}</td>
+                        }
+                    </tr>
+                    }
+                </table>
+    
+                <hr>
+                <div class="row">
+                    <div id="inputField">
+                        <label>{{'step-number' | transloco}}</label>
+                        <input [ngSignal]="stepNumber" type="number" min="1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="inputField">
+                        <label>{{'step-name' | transloco}}</label>
+                        <input [ngSignal]="stepName" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="inputField">
+                        <label>{{'step-description' | transloco}}</label>
+                        <input [ngSignal]="stepDescription" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="inputFieldButtons">
+                        <button (click)="postStep()">{{'add-step' | transloco}}</button>
+                        <button [disabled]="selectedStepId() === -1" (click)="editStep()">{{'edit' | transloco}}</button>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+  

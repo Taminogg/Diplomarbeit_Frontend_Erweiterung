@@ -1,0 +1,43 @@
+<div class="bodyBox">
+  <div>
+    <h1>{{'functions' | transloco}}</h1>
+  </div>
+  <div id="cards">
+
+    <div class="card" (click)="switchToPage('/container-request-page/containerRequestCS')">
+      <div class="card-border"></div>
+      <app-container-tool-function class="card-content" [toolFunctionName]="'container-request-cs-header'"
+              [toolFunctionDescription]="'container-request-description'" [toolImage]="'../../assets/images/ContainerAnfrage.jpg'"></app-container-tool-function>
+    </div>
+      
+    <div class="card" (click)="switchToPage('/container-request-page/productionPlanningCS')">
+      <div class="card-border"></div>
+      <app-container-tool-function class="card-content" [toolFunctionName]="'container-production-planning-cs-header'"
+        [toolFunctionDescription]="'container-production-planning-description'" [toolImage]="'../../assets/images/AnfrageLieferzeit.jpg'"
+        ></app-container-tool-function>
+      </div>
+
+      <div class="card" (click)="switchToPage('/admin-page')"> 
+        <div class="card-border"></div>
+        <app-container-tool-function class="card-content" [toolFunctionName]="'admin-page'" [toolFunctionDescription]="'admin-page'"[toolImage]="'../../assets/images/Admin.jpg'"
+        ></app-container-tool-function>
+
+      </div>
+      <div class="card" (click)="switchToPage('/container-request-page/containerRequestTL')"> 
+        <div class="card-border"></div>
+        <app-container-tool-function class="card-content" [toolFunctionName]="'container-request-tl-header'"
+        [toolFunctionDescription]="'container-request-description'" [toolImage]="'../../assets/images/ContainerAnfrage.jpg'"></app-container-tool-function>
+      </div>
+      
+      <div class="card" (click)="switchToPage('/container-request-page/productionPlanningPP')"> 
+        <div class="card-border"></div>
+        <app-container-tool-function class="card-content" [toolFunctionName]="'container-production-planning-pp-header'"
+        [toolFunctionDescription]="'container-production-planning-description'" [toolImage]="'../../assets/images/AnfrageLieferzeit.jpg'"></app-container-tool-function>
+      </div>
+      
+  </div>
+</div>
+
+<div class="bottomBox">
+  <p>&#64;2023 Copyright: <u (click)="goToUrl()">Teufelberger.com</u></p>
+</div>

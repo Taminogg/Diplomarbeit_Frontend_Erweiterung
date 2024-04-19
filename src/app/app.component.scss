@@ -1,0 +1,37 @@
+@import 'primeicons/primeicons.css';
+@import 'primeng/resources/themes/nova/theme.css';
+@import 'primeng/resources/primeng.min.css';
+
+header {
+    padding: 15px;
+    background: #0d47a1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.background {
+     background-color:  rgb(20,20,20);
+    // background-color:  white;
+    height: 100vh;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+
+header h1{
+    color: white;
+}
+
+.bottomBox a{
+    color: white;
+}
+
+.contentBox{
+    display: flex;
+}
+
+.dropdownImg {
+    width: 45px;
+    margin-top: 5px;
+}

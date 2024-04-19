@@ -1,0 +1,48 @@
+<!-- <div id="box">
+  <div id="header">
+    <h3>{{'checklist' | transloco}}</h3>
+  </div>
+  <div id="content">
+    <form [formGroup]="myForm">
+      <div formArrayName="steps">
+        @for (step of stepsFormArray.controls; track $index) {
+        <div [formGroup]="getFormGroup($index)">
+          <div class="checkbox-container">
+            <label class="checkbox-label">{{this.getFormGroup($index).get('stepname')!.value}}</label>
+            <input class="checkbox-input" type="checkbox" formControlName="isCompleted">
+          </div>
+          <label class="step-description">{{this.getFormGroup($index).get('stepdescription')!.value}}</label>
+        </div>
+        <hr>
+        }
+      </div>
+    </form>
+    <button (click)="saveChecklist()">{{'save' | transloco}}</button>
+  </div>
+</div> -->
+
+<div id="box">
+  <div id="header">
+    <h3>{{'checklist' | transloco}}</h3>
+    <hr>
+  </div>
+  <div id="scroll-content"> <!-- Neuer Container für scrollbaren Inhalt -->
+    <div id="content">
+      <form [formGroup]="myForm">
+        <div formArrayName="steps">
+          @for (step of stepsFormArray.controls; track $index) {
+          <div [formGroup]="getFormGroup($index)">
+            <div class="checkbox-container">
+              <label class="checkbox-label">{{this.getFormGroup($index).get('stepname')!.value}}</label>
+              <input class="checkbox-input" type="checkbox" formControlName="isCompleted">
+            </div>
+            <label class="step-description">{{this.getFormGroup($index).get('stepdescription')!.value}}</label>
+          </div>
+          <hr>
+          }
+        </div>
+      </form>
+    </div>
+  </div>
+  <button (click)="saveChecklist()">{{'save' | transloco}}</button> <!-- Button außerhalb von #scroll-content -->
+</div>

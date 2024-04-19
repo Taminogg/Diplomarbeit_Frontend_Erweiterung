@@ -1,0 +1,24 @@
+<div class="background">
+
+  <header>
+  <h1 (click)="navigateToHomePage()"><img src="/assets/images/TB_Logo.png" alt="Logo"></h1>
+  <nav>
+    <p-dropdown [options]="languagesList" [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage($event)">
+      <ng-template let-item pTemplate="selectedItem">
+        @if(item && item.imgUrl){
+          <img [src]="item.imgUrl" style="width: 40px;" />
+        }
+      </ng-template>
+      <ng-template let-item pTemplate="item">
+        @if(item && item.imgUrl){
+            <img class="dropdownImg" [src]="item.imgUrl" />
+        }
+      </ng-template>
+    </p-dropdown>
+  </nav>
+</header>
+
+<div>
+  <router-outlet></router-outlet>
+</div>
+</div>

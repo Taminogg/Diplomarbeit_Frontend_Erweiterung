@@ -1,0 +1,201 @@
+.back-button {
+  background-color: rgb(20,20,20);
+  color: white;
+  padding: 10px 20px;
+  border: 2px solid white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+label{
+  color: white;
+}
+
+.save-button {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: center; /* Zentriert den Button im Container */
+  margin-top: 10px; /* Fügt Abstand nach dem <hr> ein */
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+button {
+  background-color: gray;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-right: 5px;transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+  
+  background-color: white;
+  color: rgb(20,20,20);
+}
+
+.information-name {
+  margin-right: 10px;
+}
+
+.form-container {
+  width: 100%;
+  padding: 20px;
+}
+
+.scroll {
+  overflow-y: auto;
+  max-height: calc(100vh - 70px);
+}
+
+.form-group {
+  margin: 0 auto; 
+  padding: 10px;
+  margin-right: 30px;
+  min-height: 500px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.back-button {
+  margin-right: 100px;
+  width: 200px;
+}
+
+.added-information{
+  display: flex;
+  justify-content: space-between;
+}
+
+.hidden-button {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.border {
+  padding: 5px;
+  border: 10px solid #ccc;
+  min-height: 200px;
+  min-width: 350px;
+}
+
+// #selectionBox{
+//   position: relative;
+//   display: inline-grid;
+//   border-radius: 10px;
+//   width: fit-content;
+//   padding: 20px;
+//   padding-top: 40px; /* Erhöht den oberen Abstand für den Titel */
+//   margin: 30px;
+//   border: 2px solid white;
+//   min-width: 300px;
+// }
+
+// #selectionBox {
+//   display: flex;
+//   flex-direction: column; /* Ändert die Flex-Richtung zu einer Spalte */
+//   align-items: flex-start; /* Ausrichtung der Kinder am Anfang der Flex-Container */
+//   border-radius: 10px;
+//   width: fit-content;
+//   min-width: 300px;
+//   padding: 20px;
+//   margin: 30px;
+//   border: 2px solid white;
+// }
+
+// #selectionBox {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between; /* Verteilt den Platz zwischen den Items */
+//   align-items: flex-start; /* Ausrichtung der Items am Anfang */
+//   border-radius: 10px;
+//   width: fit-content;
+//   min-width: 300px;
+//   height: 100%; /* Stellen Sie sicher, dass das div die volle Höhe einnimmt */
+//   min-height: 500px; /* Mindesthöhe; passen Sie dies an Ihre Bedürfnisse an */
+//   padding: 20px;
+//   margin: 30px;
+//   border: 2px solid white;
+// }
+
+#selectionBox {
+  position: relative; /* Damit position: absolute; des Titels relativ zu diesem Container ist */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-radius: 10px;
+  width: fit-content;
+  min-width: 500px;
+  height: 100%;
+  min-height: 500px;
+  padding: 20px 20px 20px 20px; /* Angepasst, um Platz für den Titel zu schaffen */
+  margin: 30px;
+  border: 2px solid white;
+}
+
+#saveTableBtn {
+  align-self: center; /* Zentriert den Button im Container */
+  margin-top: 10px; /* Fügt etwas Abstand zum oberen Element hinzu */
+}
+
+#selectionBox::before {
+  content: 'Informationen in der Übersicht'; /* Titel der OptionsBox */
+  position: absolute;
+  top: -15px; /* Positioniert den Titel über dem oberen Rand */
+  left: 20px; /* Horizontale Position */
+  background-color: rgb(20, 20, 20); /* Hintergrundfarbe des Titels */
+  color: white; /* Textfarbe */
+  padding: 0 10px; /* Innerer Abstand */
+  border-radius: 5px; /* Rundet die Ecken des Titel-Containers */
+  font-size: 15px; /* Größere Schrift */
+  font-weight: bold;
+}
+
+#saveTableBtn{
+  max-height: 300px;
+}
+
+.items-wrapper {
+  margin-bottom: 10px; /* Stellt Abstand vor einem möglichen unteren Element sicher */
+  width: 100%;
+}
+
+.title {
+  position: absolute;
+  top: -20px; /* Justieren Sie diesen Wert entsprechend der Größe Ihres Titels */
+  left: 20px;
+  background-color: rgb(20, 20, 20);
+  color: white;
+  padding: 0 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.added-information {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px; /* Fügt Abstand zwischen den Einträgen hinzu */
+}
+
+.information-name {
+  margin-right: 10px;
+}

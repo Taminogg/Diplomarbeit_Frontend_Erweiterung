@@ -1,0 +1,415 @@
+<div class="scroll">
+<div class="form-container">
+  <div class="row-button">
+    <button class="back-button" (click)="editService.navigateToPath()">{{'back' | transloco}}</button>
+    <button class="save-button" (click)="editService.generatePDFFromContent()">{{'generatePDF' | transloco}}</button>
+  </div>
+
+  <div id="contentToConvert" class="form-content">
+    <div class="form-row"> <!--Created by ding-->
+      <div class="form-group">
+        <div class="header-container">
+          <div>
+            <label>{{'created-by' | transloco}}</label>
+          </div>
+          <div>
+            @if(!isCreatedByValid()){
+            <label class="error-message">{{'simple-error' | transloco}}</label>
+            }
+          </div>
+        </div>
+        <input [ngSignal]="editService.createdByCS" type="text">
+      </div>
+
+      <div class="form-group">
+        <div class="header-container">
+          <div>
+            <label>{{'customer' | transloco}}</label>
+          </div>
+          <div>
+            @if(!isCustomerValid()){
+            <label class="error-message">{{'simple-error' | transloco}}</label>
+            }
+          </div>
+        </div>
+        <input [ngSignal]="editService.customerName" type="text">
+      </div>
+
+      <div class="form-group">
+        <div class="header-container">
+          <div>
+            <label>{{'country' | transloco}}</label>
+          </div>
+          <div>
+            @if(!isCountryValid()){
+            <label class="error-message">{{'simple-error' | transloco}}</label>
+            }
+          </div>
+        </div>
+        <input type="text" [ngSignal]="country">
+      </div>
+
+      <div class="form-group medium-number-field">
+        <div class="header-container">
+          <div>
+            <label>{{'ab-nr' | transloco}}</label>
+          </div>
+          <div>
+            @if(!isAbNumberValid()){
+            <label class="error-message">{{'simple-error' | transloco}}</label>
+            }
+          </div>
+        </div>
+        <input [ngSignal]="abnumber" type="number">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group"> <!--Bereit zum Laden-->
+        <div class="header-container">
+          <div>
+            <label>{{'ready-to-load' | transloco}}</label>
+          </div>
+          <div>
+            @if(!isReadyToLoadValid()){
+            <label class="error-message">{{'simple-error' | transloco}}</label>
+            }
+          </div>
+        </div>
+        <input [ngSignal]="readyToLoad" type="date" format="dd.MM.yyyy">
+      </div>
+
+      <div class="form-group"> <!--Incoterm-->
+        <div class="header-container">
+          <div>
+            <label>{{'incoterm' | transloco}}</label>
+          </div>
+          <div>
+            @if(!isIncotermValid()){
+            <label class="error-message">{{'simple-error' | transloco}}</label>
+            }
+          </div>
+        </div>
+        <input [ngSignal]="incoterm" type="text">
+      </div>
+
+      <div class="form-group">
+        <div class="header-container">
+          <div>
+            <label>{{'checklist' | transloco}}</label>
+          </div>
+          <div>
+            @if(!isChecklistValid()){
+            <label class="error-message">{{'simple-error' | transloco}}</label>
+            }
+          </div>
+        </div>
+        <select #currChecklist (change)="editService.checklistId.set(+currChecklist.value)">
+          @for (currChecklist of allChecklists(); track $index) {
+          <option value="{{currChecklist.id}}">{{currChecklist.checklistname}}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group additional-text">
+        <label>{{'additional-text' | transloco}}</label>
+        <textarea style="resize: none;" [ngSignal]="editService.additonalInformation" type="text"></textarea>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>{{'container-size' | transloco}}</label>
+      </div>
+
+      <div class="form-group small-number-field">
+        <div class="header-container">
+          <div>
+            <label>{{'container-size-a' | transloco}}</label>
+          </div>
+          <div>
+            @if(!isContainerSizeAValid()){
+            <label class="error-message">{{'simple-error' | transloco}}</label>
+            }
+          </div>
+        </div>
+        <input min="1" [ngSignal]="containersizeA" type="number">
+      </div>
+
+      <div class="form-group small-number-field">
+        <div class="header-container">
+          <div>
+            <label>{{'container-size-b' | transloco}}</label>
+          </div>
+          <div>
+            @if(!isContainerSizeBValid()){
+            <label class="error-message">{{'simple-error' | transloco}}</label>
+            }
+          </div>
+        </div>
+        <input min="1" [ngSignal]="containersizeB" type="number">
+      </div>
+
+      <div class="form-group small-number-field">
+        <div class="header-container">
+          <div>
+            <label>{{'container-size-hc' | transloco}}</label>
+          </div>
+          <div>
+            @if(!isContainerSizeHcValid()){
+            <label class="error-message">{{'simple-error' | transloco}}</label>
+            }
+          </div>
+        </div>
+        <input min="1" [ngSignal]="containersizeHc" type="number">
+      </div>
+
+      <div class="form-group">
+        <div class="header-container">
+          <div>
+            <label>{{'gross-weight-in-kg' | transloco}}</label>
+          </div>
+          <div>
+            @if(!isGrossWeightInKgValid()){
+            <label class="error-message">{{'simple-error' | transloco}}</label>
+            }
+          </div>
+        </div>
+        <input [ngSignal]="grossWeightInKg" type="number">
+      </div>
+    </div>
+
+    <div class="simple-row">
+      <div>
+        <label>{{'free-detention' | transloco}}</label>
+      </div>
+
+      @for (duration of durations; track $index) {
+      <div class="simple-margin">
+        <label class="custom-radio">
+          @if (duration === 0) {
+          {{'no-free-detention' | transloco}}
+          }@else {
+          {{ duration }} {{'days' | transloco}}
+          }
+          <input type="radio" name="duration" (change)="setRadioButtonsInputsValid()" [value]="duration"
+            [(ngModel)]="selectedFreeDetention"></label>
+      </div>
+      }
+    </div>
+
+    <div class="simple-row">
+      <div>
+        <label class="checkbox-label">{{'thc' | transloco}}</label>
+      </div>
+
+      <div class="simple-margin">
+        <label class="custom-radio">{{'tb' | transloco}} <input type="radio" (change)="setRadioButtonsInputsValid()"
+            name="thc" [value]="0" [(ngModel)]="selectedThc"></label>
+      </div>
+
+      <div class="simple-margin">
+        <label class="custom-radio">{{'customer' | transloco}} <input type="radio"
+            (change)="setRadioButtonsInputsValid()" name="thc" [value]="1" [(ngModel)]="selectedThc"></label>
+      </div>
+
+      <div class="simple-margin">
+        <label class="custom-radio">{{'thc-default' | transloco}} <input type="radio"
+            (change)="setRadioButtonsInputsValid()" name="thc" [value]="2" [(ngModel)]="selectedThc"></label>
+      </div>
+    </div>
+
+    <div class="simple-row">
+      <div>
+        <button class="add-article-button" (click)="addArticle(1,1,1)">{{'add-article' | transloco}}</button>
+      </div>
+
+      <div class="simple-margin-with-top">
+        <label class="custom-radio">{{'fast-line' | transloco}} <input (change)="setAreArticleNumbersValid()"
+            type="radio" (change)="setRadioButtonsInputsValid()" name="lines" [value]="0"
+            [(ngModel)]="selectedLine"></label>
+      </div>
+
+      <div class="simple-margin-with-top">
+        <label class="custom-radio">{{'direct-line' | transloco}} <input (change)="setAreArticleNumbersValid()"
+            type="radio" (change)="setRadioButtonsInputsValid()" name="lines" [value]="1"
+            [(ngModel)]="selectedLine"></label>
+      </div>
+
+      <div class="simple-margin-with-top">
+        <label class="custom-radio">{{'line-default' | transloco}} <input (change)="setAreArticleNumbersValid()"
+            type="radio" (change)="setRadioButtonsInputsValid()" name="lines" [value]="2"
+            [(ngModel)]="selectedLine"></label>
+      </div>
+    </div>
+
+    <form [formGroup]="myForm">
+      <div formArrayName="articles">
+        @for (articleGroup of articlesFormArray.controls; track $index) {
+        <div [formGroup]="getFormGroup($index)">
+          <div class="form-row">
+            <div class="form-group margin-top medium-number-field">
+              <div class="header-container">
+                <div>
+                  <label>{{'article-number' | transloco}}</label>
+                </div>
+                <div>
+                  @if (getFormGroup($index).get('articleNumber')!.value < 1) { <label class="error-message">
+                    {{'simple-error' | transloco}}</label>
+                    }
+                </div>
+              </div>
+              <input (change)="setAreArticleNumbersValid()" min="1" type="number" formControlName="articleNumber">
+            </div>
+
+            @if (selectedLine === 0 || selectedLine === 1) {
+            <div class="form-group small-number-field">
+              <div class="header-container">
+                <div>
+                  <label>{{'pallet-amount' | transloco}}</label>
+                </div>
+                <div>
+                  @if (getFormGroup($index).get('palletAmount')!.value < 1) { <label class="error-message">
+                    {{'simple-error' | transloco}}</label>
+                    }
+                </div>
+              </div>
+              <input (change)="setAreArticleNumbersValid()" min="1" type="number" formControlName="palletAmount">
+            </div>
+            }
+            @else {
+            <div class="form-group"></div>
+            }
+
+          </div>
+          @if (articlesFormArray.controls.length > 1) {
+          <button class="remove-article-button" (click)="removeArticle($index)">{{'remove-article' |
+            transloco}}</button>
+          }
+        </div>
+        }
+      </div>
+    </form>
+
+    @if (isApprovedByTl()) {
+    <br>
+    <br>
+
+    <div class="tlData">
+      <div class="form-row">
+        <div class="form-group">
+          <label>{{'sped' | transloco}}</label>
+          <input class="not-editable" readonly type="text" [ngSignal]="sped">
+        </div>
+
+        <div class="form-group"></div>
+        <div class="form-group"></div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>{{'invoice-on' | transloco}}</label>
+          <input class="not-editable" readonly type="date" [ngSignal]="invoiceOn" format="dd.MM.yyyy">
+        </div>
+
+        <div class="form-group">
+          <label>{{'retrieve-date' | transloco}}</label>
+          <input class="not-editable" readonly type="date" [ngSignal]="retrieveDate" format="dd.MM.yyyy">
+        </div>
+
+        <div class="form-group">
+          <label>{{'retrieve-location' | transloco}}</label>
+          <input class="not-editable" readonly type="text" [ngSignal]="retrieveLocation">
+        </div>
+
+        <div class="form-group"></div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>{{'port-of-departure' | transloco}}</label>
+          <input class="not-editable" readonly type="text" [ngSignal]="portOfDeparture">
+        </div>
+
+        <div class="form-group">
+          <label>{{'accepting-port' | transloco}}</label>
+          <input class="not-editable" readonly type="text" [ngSignal]="acceptingPort">
+        </div>
+
+        <div class="form-group"></div>
+        <div class="form-group"></div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>{{'sc-general' | transloco}}</label>
+          <input class="not-editable" readonly type="number" [ngSignal]="scGeneral">
+        </div>
+
+        <div class="form-group">
+          <label>{{'sc-main-run' | transloco}}</label>
+          <input class="not-editable" readonly type="number" [ngSignal]="scMain">
+        </div>
+
+        <div class="form-group">
+          <label>{{'sc-trail' | transloco}}</label>
+          <input class="not-editable" readonly type="number" [ngSignal]="scTrail">
+        </div>
+
+        <div class="form-group"></div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>{{'ets' | transloco}}</label>
+          <input class="not-editable" readonly type="date" [ngSignal]="ets" format="dd.MM.yyyy">
+        </div>
+
+        <div class="form-group">
+          <label>{{'eta' | transloco}}</label>
+          <input class="not-editable" readonly type="date" [ngSignal]="eta" format="dd.MM.yyyy">
+        </div>
+
+        <div class="form-group">
+          <label>{{'boat' | transloco}}</label>
+          <input class="not-editable" readonly type="text" [ngSignal]="boat">
+        </div>
+
+        <div class="form-group"></div>
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="row-button">
+    <div>
+      @if (actionType === 'new') {
+      <button class="save-button" [disabled]="!isAllValid()" (click)="saveNewOrderWithoutPublish()">{{'save' |
+        transloco}}</button>
+      }@else {
+      <button class="save-button" [disabled]="!isAllValid()" (click)="saveOrder()">{{'save' | transloco}}</button>
+      }
+
+      @if (actionType === 'new') {
+      <button class="save-button simple-margin" [disabled]="!isAllValid()"
+        (click)="postAndPublish()">{{'save-and-publish' |
+        transloco}}</button>
+      }@else {
+      <button class="save-button simple-margin" [disabled]="!isAllValid()" (click)="publish()">{{'save-and-publish' |
+        transloco}}</button>
+      }
+    </div>
+    @if (actionType !== 'new') {
+    <div>
+      <button
+        [disabled]="!isApprovedByTl() || editService.currOrder().successfullyFinished || editService.currOrder().canceled"
+        class="save-button" (click)="finishOrder()">{{'finish' |
+        transloco}}</button>
+
+      <button class="save-button simple-margin"
+        [disabled]="editService.currOrder().successfullyFinished || editService.currOrder().canceled"
+        (click)="cancelOrder()">{{'cancel' | transloco}}</button>
+    </div>
+    }
+  </div>
+</div>
