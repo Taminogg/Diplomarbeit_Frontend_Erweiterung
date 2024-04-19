@@ -9,11 +9,6 @@
   margin-bottom: 20px;
 }
 
-.scroll {
-  overflow-y: auto;
-  max-height: calc(100vh - 70px);
-}
-
 #firstRow, #secondRow, #thirdRow, #fourthRow{
   display: flex;
   justify-content: space-between;

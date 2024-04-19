@@ -1,229 +1,227 @@
-<div class="scroll">
-  <div class="form-container">
+<div class="form-container">
+  <div class="form-row">
+    <button class="back-button" (click)="editService.navigateToPath()">{{'back' | transloco}}</button>
+    <button class="save-button" (click)="editService.generatePDFFromContent()">{{'generatePDF' | transloco}}</button>
+  </div>
+
+  <div id="contentToConvert" class="form-content">
     <div class="form-row">
-      <button class="back-button" (click)="editService.navigateToPath()">{{'back' | transloco}}</button>
-      <button class="save-button" (click)="editService.generatePDFFromContent()">{{'generatePDF' | transloco}}</button>
-    </div>
-  
-    <div id="contentToConvert" class="form-content">
-      <div class="form-row">
-        <div class="form-group">
-          <label>{{'customer' | transloco}}</label>
-          <input class="not-editable" readonly [ngSignal]="editService.customerName" type="text">
-        </div>
-  
-        <div class="form-group">
-          <label>{{'created-by' | transloco}}</label>
-          <input class="not-editable" readonly [ngSignal]="editService.createdByCS" type="text">
-        </div>
-  
-        <div class="form-group">
-          <label>{{'recieving-country' | transloco}}</label>
-          <input class="not-editable" readonly [ngSignal]="recievingCountry" type="text">
-        </div>
-  
-        <div class="form-group">
-          <label>{{'customer-priority' | transloco}}</label>
-          <input class="not-editable" readonly [ngSignal]="customerPriority" type="text">
-        </div>
-  
-        <div class="form-group">
-          <div class="header-container">
-            <div>
-              <label>{{'edited-by' | transloco}}</label>
-            </div>
-            <div>
-              @if (!isCreatedBySDValid()) { <label class="error-message">
-                {{'simple-error' | transloco}}</label>
-              }
-            </div>
-          </div>
-          <input [ngSignal]="editService.createdBySD" type="text">
-        </div>
-  
-        <div class="form-group additional-text">
-          <label>{{'additional-text' | transloco}}</label>
-          <textarea style="resize: none;" [ngSignal]="editService.additonalInformation" type="text"></textarea>
-        </div>
+      <div class="form-group">
+        <label>{{'customer' | transloco}}</label>
+        <input class="not-editable" readonly [ngSignal]="editService.customerName" type="text">
       </div>
-  
-      <form [formGroup]="myForm">
-        <div formArrayName="articles">
-          @for (articleGroup of articlesFormArray.controls; track $index) {
-          <div [formGroup]="getFormGroup($index)">
-            <div class="border">
-              <div class="form-row">
-                <div class="form-group">
-                  <div class="header-container">
-                    <div>
-                      <label>{{'delivery-date' | transloco}}</label>
-                    </div>
-                    <div>
-                      @if (!validationService.isCalenderWeekValid(getFormGroup($index).get('deliveryDate')!.value)) {
-                      <label class="error-message">
-                        {{'simple-error' | transloco}}</label>
-                      }
-                    </div>
+
+      <div class="form-group">
+        <label>{{'created-by' | transloco}}</label>
+        <input class="not-editable" readonly [ngSignal]="editService.createdByCS" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>{{'recieving-country' | transloco}}</label>
+        <input class="not-editable" readonly [ngSignal]="recievingCountry" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>{{'customer-priority' | transloco}}</label>
+        <input class="not-editable" readonly [ngSignal]="customerPriority" type="text">
+      </div>
+
+      <div class="form-group">
+        <div class="header-container">
+          <div>
+            <label>{{'edited-by' | transloco}}</label>
+          </div>
+          <div>
+            @if (!isCreatedBySDValid()) { <label class="error-message">
+              {{'simple-error' | transloco}}</label>
+            }
+          </div>
+        </div>
+        <input [ngSignal]="editService.createdBySD" type="text">
+      </div>
+
+      <div class="form-group additional-text">
+        <label>{{'additional-text' | transloco}}</label>
+        <textarea style="resize: none;" [ngSignal]="editService.additonalInformation" type="text"></textarea>
+      </div>
+    </div>
+
+    <form [formGroup]="myForm">
+      <div formArrayName="articles">
+        @for (articleGroup of articlesFormArray.controls; track $index) {
+        <div [formGroup]="getFormGroup($index)">
+          <div class="border">
+            <div class="form-row">
+              <div class="form-group">
+                <div class="header-container">
+                  <div>
+                    <label>{{'delivery-date' | transloco}}</label>
                   </div>
                   <div>
-                    <div class="kw">
-                      <div class="simple-margin-with-margin-top"><label>{{ 'kw' | transloco }}</label></div> <input
-                        (input)="setAreArticlesValid()" type="number" formControlName="deliveryDate">
-                    </div>
+                    @if (!validationService.isCalenderWeekValid(getFormGroup($index).get('deliveryDate')!.value)) {
+                    <label class="error-message">
+                      {{'simple-error' | transloco}}</label>
+                    }
                   </div>
                 </div>
-  
-                <div class="form-group">
-                  <div class="header-container">
-                    <div>
-                      <label>{{ 'short-text' | transloco }}</label>
-                    </div>
-                    <div>
-                      @if (!this.validationService.isStringLengthOkay(this.getFormGroup($index).get('shortText')!.value))
-                      {
-                      <label class="error-message">{{ 'simple-error' | transloco }}</label>
-                      }
-                    </div>
+                <div>
+                  <div class="kw">
+                    <div class="simple-margin-with-margin-top"><label>{{ 'kw' | transloco }}</label></div> <input
+                      (input)="setAreArticlesValid()" type="number" formControlName="deliveryDate">
                   </div>
-                  <input (input)="setAreArticlesValid()" type="text" formControlName="shortText">
-                </div>
-                
-                <div class="form-group">
-                  <div class="header-container">
-                    <div>
-                      <label>{{ 'factory' | transloco }}</label>
-                    </div>
-                    <div>
-                      @if (!this.validationService.isStringLengthOkay(this.getFormGroup($index).get('factory')!.value))
-                      {
-                      <label class="error-message">{{ 'simple-error' | transloco }}</label>
-                      }
-                    </div>
-                  </div>
-                  <input (input)="setAreArticlesValid()" type="text" formControlName="factory">
-                </div>
-                
-                <div class="form-group">
-                  <div class="header-container">
-                    <div>
-                      <label>{{ 'plant' | transloco }}</label>
-                    </div>
-                    <div>
-                      @if (!this.validationService.isStringLengthOkay(this.getFormGroup($index).get('plant')!.value))
-                      {
-                      <label class="error-message">{{ 'simple-error' | transloco }}</label>
-                      }
-                    </div>
-                  </div>
-                  <input (input)="setAreArticlesValid()" type="text" formControlName="plant">
-                </div>
-                
-                <div class="form-group">
-                  <div class="header-container">
-                    <div>
-                      <label>{{ 'nozzle' | transloco }}</label>
-                    </div>
-                    <div>
-                      @if (!this.validationService.isStringLengthOkay(this.getFormGroup($index).get('nozzle')!.value))
-                      {
-                      <label class="error-message">{{ 'simple-error' | transloco }}</label>
-                      }
-                    </div>
-                  </div>
-                  <input (input)="setAreArticlesValid()" type="text" formControlName="nozzle">
-                </div>
-                
-                <div class="form-group">
-                  <div class="header-container">
-                    <div>
-                      <label>{{ 'production-order' | transloco }}</label>
-                    </div>
-                    <div>
-                      @if (!this.validationService.isStringLengthOkay(this.getFormGroup($index).get('productionOrder')!.value))
-                      {
-                      <label class="error-message">{{ 'simple-error' | transloco }}</label>
-                      }
-                    </div>
-                  </div>
-                  <input (input)="setAreArticlesValid()" type="text" formControlName="productionOrder">
-                </div>
-                
-                <div class="form-group">
-                  <div class="header-container">
-                    <div>
-                      <label>{{ 'planned-order' | transloco }}</label>
-                    </div>
-                    <div>
-                      @if (!this.validationService.isStringLengthOkay(this.getFormGroup($index).get('plannedOrder')!.value))
-                      {
-                      <label class="error-message">{{ 'simple-error' | transloco }}</label>
-                      }
-                    </div>
-                  </div>
-                  <input (input)="setAreArticlesValid()" type="text" formControlName="plannedOrder">
                 </div>
               </div>
-  
-              <div class="form-row-edited-articles">
-                <div class="form-group-edited-articles medium-number-field margin-top">
-                  <label>{{'article-number' | transloco}}</label>
-                  <input class="not-editable" readonly type="number" formControlName="articleNumber">
-                </div>
-  
-                <div class="form-group-edited-articles small-number-field">
-                  <label>{{'required-pallet-amount' | transloco}}</label>
-                  <input class="not-editable" readonly type="number" formControlName="palletAmount">
-                </div>
-  
-                <div class="form-group-edited-articles small-number-field">
-                  <label>{{'min-heigth-required' | transloco}}</label>
-                  <input class="not-editable" readonly type="number" formControlName="minHeigthRequired">
-                </div>
-  
-                <div class="form-group-edited-articles">
-                  <div class="checkbox-container">
-                    <label class="checkbox-label">{{'inquiry-for-fixed-order' | transloco}}</label>
-                    <input class="checkbox-input" type="checkbox" formControlName="inquiryForFixedOrder">
+
+              <div class="form-group">
+                <div class="header-container">
+                  <div>
+                    <label>{{ 'short-text' | transloco }}</label>
+                  </div>
+                  <div>
+                    @if (!this.validationService.isStringLengthOkay(this.getFormGroup($index).get('shortText')!.value))
+                    {
+                    <label class="error-message">{{ 'simple-error' | transloco }}</label>
+                    }
                   </div>
                 </div>
-  
-                <div class="form-group-edited-articles">
-                  <div class="checkbox-container">
-                    <label class="checkbox-label">{{'inquiry-for-non-fixed-order' | transloco}}</label>
-                    <input class="checkbox-input" type="checkbox" formControlName="inquiryForNonFixedOrder">
+                <input (input)="setAreArticlesValid()" type="text" formControlName="shortText">
+              </div>
+              
+              <div class="form-group">
+                <div class="header-container">
+                  <div>
+                    <label>{{ 'factory' | transloco }}</label>
+                  </div>
+                  <div>
+                    @if (!this.validationService.isStringLengthOkay(this.getFormGroup($index).get('factory')!.value))
+                    {
+                    <label class="error-message">{{ 'simple-error' | transloco }}</label>
+                    }
                   </div>
                 </div>
-  
-                <div class="form-group-edited-articles">
-                  <div class="checkbox-container">
-                    <label class="checkbox-label">{{'inquiry-for-quotation' | transloco}}</label>
-                    <input class="checkbox-input" type="checkbox" formControlName="inquiryForQuotation"><!-- -->
+                <input (input)="setAreArticlesValid()" type="text" formControlName="factory">
+              </div>
+              
+              <div class="form-group">
+                <div class="header-container">
+                  <div>
+                    <label>{{ 'plant' | transloco }}</label>
+                  </div>
+                  <div>
+                    @if (!this.validationService.isStringLengthOkay(this.getFormGroup($index).get('plant')!.value))
+                    {
+                    <label class="error-message">{{ 'simple-error' | transloco }}</label>
+                    }
                   </div>
                 </div>
-  
-                <div class="form-group-edited-articles small-number-field margin-top">
-                  <label>{{'desired-delivery-date' | transloco}}</label>
-                  <div class="kw">
-                    <div class="simple-margin-with-margin-top"><label>{{ 'kw' | transloco }}</label></div> <input class="not-editable"
-                      readonly type="number" formControlName="desiredDeliveryDate">
+                <input (input)="setAreArticlesValid()" type="text" formControlName="plant">
+              </div>
+              
+              <div class="form-group">
+                <div class="header-container">
+                  <div>
+                    <label>{{ 'nozzle' | transloco }}</label>
                   </div>
+                  <div>
+                    @if (!this.validationService.isStringLengthOkay(this.getFormGroup($index).get('nozzle')!.value))
+                    {
+                    <label class="error-message">{{ 'simple-error' | transloco }}</label>
+                    }
+                  </div>
+                </div>
+                <input (input)="setAreArticlesValid()" type="text" formControlName="nozzle">
+              </div>
+              
+              <div class="form-group">
+                <div class="header-container">
+                  <div>
+                    <label>{{ 'production-order' | transloco }}</label>
+                  </div>
+                  <div>
+                    @if (!this.validationService.isStringLengthOkay(this.getFormGroup($index).get('productionOrder')!.value))
+                    {
+                    <label class="error-message">{{ 'simple-error' | transloco }}</label>
+                    }
+                  </div>
+                </div>
+                <input (input)="setAreArticlesValid()" type="text" formControlName="productionOrder">
+              </div>
+              
+              <div class="form-group">
+                <div class="header-container">
+                  <div>
+                    <label>{{ 'planned-order' | transloco }}</label>
+                  </div>
+                  <div>
+                    @if (!this.validationService.isStringLengthOkay(this.getFormGroup($index).get('plannedOrder')!.value))
+                    {
+                    <label class="error-message">{{ 'simple-error' | transloco }}</label>
+                    }
+                  </div>
+                </div>
+                <input (input)="setAreArticlesValid()" type="text" formControlName="plannedOrder">
+              </div>
+            </div>
+
+            <div class="form-row-edited-articles">
+              <div class="form-group-edited-articles medium-number-field margin-top">
+                <label>{{'article-number' | transloco}}</label>
+                <input class="not-editable" readonly type="number" formControlName="articleNumber">
+              </div>
+
+              <div class="form-group-edited-articles small-number-field">
+                <label>{{'required-pallet-amount' | transloco}}</label>
+                <input class="not-editable" readonly type="number" formControlName="palletAmount">
+              </div>
+
+              <div class="form-group-edited-articles small-number-field">
+                <label>{{'min-heigth-required' | transloco}}</label>
+                <input class="not-editable" readonly type="number" formControlName="minHeigthRequired">
+              </div>
+
+              <div class="form-group-edited-articles">
+                <div class="checkbox-container">
+                  <label class="checkbox-label">{{'inquiry-for-fixed-order' | transloco}}</label>
+                  <input class="checkbox-input" type="checkbox" formControlName="inquiryForFixedOrder">
+                </div>
+              </div>
+
+              <div class="form-group-edited-articles">
+                <div class="checkbox-container">
+                  <label class="checkbox-label">{{'inquiry-for-non-fixed-order' | transloco}}</label>
+                  <input class="checkbox-input" type="checkbox" formControlName="inquiryForNonFixedOrder">
+                </div>
+              </div>
+
+              <div class="form-group-edited-articles">
+                <div class="checkbox-container">
+                  <label class="checkbox-label">{{'inquiry-for-quotation' | transloco}}</label>
+                  <input class="checkbox-input" type="checkbox" formControlName="inquiryForQuotation"><!-- -->
+                </div>
+              </div>
+
+              <div class="form-group-edited-articles small-number-field margin-top">
+                <label>{{'desired-delivery-date' | transloco}}</label>
+                <div class="kw">
+                  <div class="simple-margin-with-margin-top"><label>{{ 'kw' | transloco }}</label></div> <input class="not-editable"
+                    readonly type="number" formControlName="desiredDeliveryDate">
                 </div>
               </div>
             </div>
           </div>
-          <br>
-          }
         </div>
-      </form>
-    </div>
-  
-    <div class="form-row">
-      <div>
-        <button class="save-button" [disabled]="!isAllValid()" (click)="saveOrder()">{{'save' | transloco}}</button>
-  
-        <button class="save-button simple-margin" [disabled]="!isAllValid()" (click)="publish()">{{'save-and-publish' |
-          transloco}}</button>
+        <br>
+        }
       </div>
-      <div></div>
+    </form>
+  </div>
+
+  <div class="form-row">
+    <div>
+      <button class="save-button" [disabled]="!isAllValid()" (click)="saveOrder()">{{'save' | transloco}}</button>
+
+      <button class="save-button simple-margin" [disabled]="!isAllValid()" (click)="publish()">{{'save-and-publish' |
+        transloco}}</button>
     </div>
-</div>
+    <div></div>
+  </div>

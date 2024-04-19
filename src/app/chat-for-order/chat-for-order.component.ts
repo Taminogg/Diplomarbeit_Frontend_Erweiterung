@@ -5,7 +5,6 @@ import { DecimalPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslocoModule } from '@ngneat/transloco';
 import { MatIconModule } from '@angular/material/icon';
-import { EditService } from '../shared/edit.service';
 
 
 @Component({
@@ -22,7 +21,6 @@ export class ChatForOrderComponent implements OnInit {
   fileToUpload: File | null = null;
 
   router = inject(Router);
-  editService = inject(EditService);
   messageService = inject(MessagesService);
   messageConversationService = inject(MessageConversationsService);
   filesService = inject(FilesService);
@@ -123,6 +121,18 @@ export class ChatForOrderComponent implements OnInit {
   }
 
   sendMessage(): void {
+    let from = '';
+
+    if (this.htmlContent === "containerRequestCS" || this.htmlContent === "productionPlanningCS") {
+      from = 'CS';
+    } else if (this.htmlContent === "containerRequestTL") {
+      from = 'TL';
+    } else if (this.htmlContent === "productionPlanningPP") {
+      from = 'PP';
+    } else {
+      from = 'unknown';
+    }
+
     let message: AddMessageDto = {
       content: ""
     };
@@ -133,14 +143,14 @@ export class ChatForOrderComponent implements OnInit {
           message = {
             content: this.messageContent(),
             attachmentId: x.id,
-            from: this.editService.username()
+            from: from
           };
           this.postMessage(message);
         });
     } else {
       message = {
         content: this.messageContent(),
-        from: this.editService.username()
+        from: from
       };
       this.postMessage(message);
     }

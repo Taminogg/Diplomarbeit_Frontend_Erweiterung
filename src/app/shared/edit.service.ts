@@ -23,7 +23,6 @@ export class EditService {
   additonalInformation = signal('');
   createdOn = signal('');
   finishedOn = signal('');
-  username = signal("");
   navigationPath = '';
   currOrder = signal<OrderDto>(
     {

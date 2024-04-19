@@ -29,7 +29,6 @@ export class DataService {
   showFinished = false;
   showCanceled = false;
   dataLoading = signal(false);
-  
 
   getOrdersOrderedBy(orderString: string): void {
     switch (orderString) {
