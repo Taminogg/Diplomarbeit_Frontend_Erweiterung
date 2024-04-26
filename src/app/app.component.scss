@@ -2,21 +2,26 @@
 @import 'primeng/resources/themes/nova/theme.css';
 @import 'primeng/resources/primeng.min.css';
 
+body {
+    background-color: rgb(20, 20, 20); /* Set the background color for the body */
+    margin: 0; /* Reset default margin */
+    padding: 0; /* Reset default padding */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.background {
+    background-color: rgb(20, 20, 20); /* Set background color */
+    min-height: 100vh; /* Ensure background fills at least the viewport height */
+    overflow-y: auto; /* Allow vertical scroll if content exceeds viewport */
+    padding-bottom: 20px; /* Add some padding to prevent content from sticking to the bottom */
+}
+
 header {
     padding: 15px;
     background: #0d47a1;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.background {
-     background-color:  rgb(20,20,20);
-    // background-color:  white;
-    height: 100vh;
-    margin: 0px;
-    overflow: hidden;
-    padding: 0px;
 }
 
 header h1{
