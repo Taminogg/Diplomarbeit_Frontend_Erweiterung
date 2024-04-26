@@ -92,45 +92,6 @@ button:hover {
   min-width: 350px;
 }
 
-// #selectionBox{
-//   position: relative;
-//   display: inline-grid;
-//   border-radius: 10px;
-//   width: fit-content;
-//   padding: 20px;
-//   padding-top: 40px; /* Erhöht den oberen Abstand für den Titel */
-//   margin: 30px;
-//   border: 2px solid white;
-//   min-width: 300px;
-// }
-
-// #selectionBox {
-//   display: flex;
-//   flex-direction: column; /* Ändert die Flex-Richtung zu einer Spalte */
-//   align-items: flex-start; /* Ausrichtung der Kinder am Anfang der Flex-Container */
-//   border-radius: 10px;
-//   width: fit-content;
-//   min-width: 300px;
-//   padding: 20px;
-//   margin: 30px;
-//   border: 2px solid white;
-// }
-
-// #selectionBox {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between; /* Verteilt den Platz zwischen den Items */
-//   align-items: flex-start; /* Ausrichtung der Items am Anfang */
-//   border-radius: 10px;
-//   width: fit-content;
-//   min-width: 300px;
-//   height: 100%; /* Stellen Sie sicher, dass das div die volle Höhe einnimmt */
-//   min-height: 500px; /* Mindesthöhe; passen Sie dies an Ihre Bedürfnisse an */
-//   padding: 20px;
-//   margin: 30px;
-//   border: 2px solid white;
-// }
-
 #selectionBox {
   position: relative; /* Damit position: absolute; des Titels relativ zu diesem Container ist */
   display: flex;
@@ -170,13 +131,13 @@ button:hover {
 }
 
 .items-wrapper {
-  margin-bottom: 10px; /* Stellt Abstand vor einem möglichen unteren Element sicher */
-  width: 100%;
+  overflow-y: auto;
+  height: 420px;
 }
 
 .title {
   position: absolute;
-  top: -20px; /* Justieren Sie diesen Wert entsprechend der Größe Ihres Titels */
+  top: -20px;
   left: 20px;
   background-color: rgb(20, 20, 20);
   color: white;
@@ -189,7 +150,7 @@ button:hover {
 .added-information {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px; /* Fügt Abstand zwischen den Einträgen hinzu */
+  margin-bottom: 5px;
 }
 
 .information-name {
