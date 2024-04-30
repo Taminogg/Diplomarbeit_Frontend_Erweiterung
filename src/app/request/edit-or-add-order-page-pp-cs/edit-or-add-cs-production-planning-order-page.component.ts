@@ -52,7 +52,7 @@ export class EditOrAddCsProductionPlanningOrderPageComponent implements OnChange
                     selectedInquiry = 2;
                   } else if (x.inquiryForFixedOrder === true) {
                     selectedInquiry = 0;
-                  } 
+                  }
 
                   this.addArticle(x.articleNumber, x.pallets, x.id, x.minHeigthRequired, x.desiredDeliveryDate, x.deliveryDate, x.shortText, x.factory, x.nozzle, x.productionOrder, x.plannedOrder, x.plant, selectedInquiry);
                 }
@@ -159,7 +159,7 @@ export class EditOrAddCsProductionPlanningOrderPageComponent implements OnChange
     });
   }
 
-  saveOrderWithoutPublish(){
+  saveOrderWithoutPublish() {
     this.saveNewOrder().then(() => {
       this.editService.navigateToPath();
     }).catch(error => {
@@ -182,6 +182,8 @@ export class EditOrAddCsProductionPlanningOrderPageComponent implements OnChange
 
 
   saveOrder(): void {
+    console.log(this.getFormGroup(0).get('deliveryDate')?.value);
+
     let editProductionPlanning: EditProductionPlanningDto = {
       customerPriority: this.customerPriority(),
       recievingCountry: this.recievingCountry(),
@@ -234,18 +236,8 @@ export class EditOrAddCsProductionPlanningOrderPageComponent implements OnChange
                 plant: this.getFormGroup(i).get('plant')?.value ?? '',
               }
 
-              if (
-                editArticle.deliveryDate !== 0 &&
-                editArticle.shortText !== '' &&
-                editArticle.nozzle !== '' &&
-                editArticle.factory !== '' &&
-                editArticle.plannedOrder !== '' &&
-                editArticle.productionOrder !== '' &&
-                editArticle.plant !== ''
-              ) {
-                this.articlesPPService.articlesPPPut(editArticle)
-                  .subscribe(_ => _);
-              }
+              this.articlesPPService.articlesPPPut(editArticle)
+                .subscribe(_ => _);
             });
           } else {
             this.articlesPPService.articlesPPPost(article).subscribe(postedArticle => {
@@ -259,19 +251,8 @@ export class EditOrAddCsProductionPlanningOrderPageComponent implements OnChange
                 productionOrder: this.getFormGroup(i).get('productionOrder')?.value ?? '',
                 plant: this.getFormGroup(i).get('plant')?.value ?? '',
               }
-
-              console.log('editArticle');
-              console.log(editArticle);
-
-              if (
-                editArticle.deliveryDate !== 0 &&
-                editArticle.shortText !== '' &&
-                editArticle.nozzle !== '' &&
-                editArticle.factory !== '' &&
-                editArticle.plannedOrder !== '' &&
-                editArticle.productionOrder !== '' &&
-                editArticle.plant !== ''
-              ) {
+              
+              if (editArticle.deliveryDate !== 0) {
                 this.articlesPPService.articlesPPPut(editArticle)
                   .subscribe(_ => this.editService.navigateToPath());
               } else {
@@ -333,7 +314,7 @@ export class EditOrAddCsProductionPlanningOrderPageComponent implements OnChange
             createdBy: this.editService.createdByCS(),
             ppId: productionPlanningObj.id,
           };
-          
+
           const additionalInformation = this.editService.additonalInformation();
           if (additionalInformation !== '') {
             order.additionalInformation = additionalInformation;

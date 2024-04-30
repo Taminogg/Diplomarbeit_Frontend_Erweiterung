@@ -54,7 +54,29 @@ export class AdminComponent implements OnInit {
         this.updateOrders();
       });
 
-      this.dataService.refreshPage('', '', 'containerRequestCS', '', true, true);
+    this.dataService.refreshPage('', '', 'containerRequestCS', '', true, true);
+  }
+
+  removeChecklist() {
+    if (this.selectedChecklistId() !== -1) {
+      this.checklistService.checklistsDelete(this.selectedChecklistId())
+        .subscribe(x => this.checklistService.checklistsGeneratedByAdminGet()
+          .subscribe(x => {
+            this.allChecklists.set(x);
+            this.selectedChecklistId.set(-1);
+          }));
+    }
+  }
+
+  removeStep() {
+    if (this.selectedStepId() !== -1) {
+      this.stepService.stepsDelete(this.selectedStepId())
+        .subscribe(x => this.stepService.stepsIdGet(this.selectedChecklistId())
+          .subscribe(x => {
+            this.allStepsForChecklist.set(x);
+            this.selectedStepId.set(-1);
+          }));
+    }
   }
 
   updateOrders() {
@@ -191,7 +213,7 @@ export class AdminComponent implements OnInit {
 
       return timeDifferenceInDays.toString();
     } else {
-      return 'No data yet.';
+      return 'no-data';
     }
   }
 
@@ -235,18 +257,18 @@ export class AdminComponent implements OnInit {
     return Number(avg.toFixed(2));
   }
 
-  getAvgTimeToGetApprovedBy(mapString:string): number {
+  getAvgTimeToGetApprovedBy(mapString: string): number {
     let totalDays = 0;
     let totalOrders = 0;
     let map = new Map<number, string>();
-    if(mapString === 'tl'){
+    if (mapString === 'tl') {
       map = this.timeToGetApprovedByTl;
-    }else{
+    } else {
       map = this.timeToGetApprovedByPpPp;
-    }    
+    }
 
     for (const value of map.values()) {
-      if (value !== 'No data yet.') {
+      if (value !== 'no-data') {
         totalOrders++;
         totalDays += parseFloat(value);
       }
@@ -263,7 +285,7 @@ export class AdminComponent implements OnInit {
     let totalOrders = 0;
 
     for (const value of this.timeToFinish.values()) {
-      if (value !== 'No data yet.') {
+      if (value !== 'no-data') {
         totalOrders++;
         totalDays += parseFloat(value);
       }

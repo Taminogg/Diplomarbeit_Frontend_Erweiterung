@@ -365,9 +365,6 @@ export class EditOrAddCsContainerRequestOrderPageComponent implements OnChanges,
 
               this.checklistService.checklistsPost(checklistDto)
                 .subscribe(currChecklist => {
-                  console.log('customerName:');
-                  console.log(this.editService.customerName());
-                  console.log(this.editService.createdByCS());
                   if (this.editService.additonalInformation() === '') {
                     order = {
                       customerName: this.editService.customerName(),

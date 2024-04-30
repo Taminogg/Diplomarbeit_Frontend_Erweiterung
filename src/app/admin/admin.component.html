@@ -103,7 +103,7 @@
     </div>
     
     <div id="tableBox">
-        @if (allOrders().length > 0) {
+        @if (filteredOrders().length > 0) {
             <table>
                 <tr>
                     @if(selectedFilter() === 'CR'){
@@ -129,21 +129,27 @@
                     <td>{{order.ppId}}</td>
                     }
                     @if(selectedFilter() === 'CR'){
-                    <td>{{getTimeForApprovedByTl(order.id)}}
+                    <td>
                         @if (!getTimeForApprovedByTl(order.id).includes('data')) {
-                            {{'days' | transloco}}
+                            {{getTimeForApprovedByTl(order.id)}} {{'days' | transloco}}
+                        }@else {
+                            {{getTimeForApprovedByTl(order.id) | transloco}}
                         }
                         </td>
                     }@else {
-                    <td>{{getTimeForApprovedByPp(order.id)}} 
+                    <td>
                         @if (!getTimeForApprovedByPp(order.id).includes('data')) {
-                            {{'days' | transloco}}
+                            {{getTimeForApprovedByPp(order.id)}}  {{'days' | transloco}}
+                        }@else {
+                            {{getTimeForApprovedByPp(order.id) | transloco}} 
                         }
                     </td>
                     }
-                    <td>{{getTimeForFinished(order.id)}}
+                    <td>
                         @if (!getTimeForFinished(order.id).includes('data')) {
-                            {{'days' | transloco}}
+                            {{getTimeForFinished(order.id)}} {{'days' | transloco}}
+                        }@else {
+                            {{getTimeForFinished(order.id) | transloco}}
                         }
                         </td>
                     <td>{{getCountForOrder(order.id, 'messages')}}</td>
@@ -194,12 +200,13 @@
                     </table>
                 </div>
                 <hr>
-                <div> <!--Reset Point -->
+                <div>
                     <div id="inputField">
                         <label id="checklistName">{{'checklist-name' | transloco}}</label>
                         <input id="checklistNameTxt" type="text" [ngSignal]="checklistName">
                     </div>
                     <button id="addChecklistBtn" (click)="postChecklist()">{{'add-checklist' | transloco}}</button>
+                    <button [disabled]="selectedChecklistId() === -1" id="addChecklistBtn" (click)="removeChecklist()">{{'remove-checklist' | transloco}}</button>
                 </div>
             </div>
             <div class="table-group"> 
@@ -248,6 +255,7 @@
                 <div class="row">
                     <div id="inputFieldButtons">
                         <button (click)="postStep()">{{'add-step' | transloco}}</button>
+                        <button [disabled]="selectedStepId() === -1" (click)="removeStep()">{{'remove-step' | transloco}}</button>
                         <button [disabled]="selectedStepId() === -1" (click)="editStep()">{{'edit' | transloco}}</button>
                     </div>
                 </div>

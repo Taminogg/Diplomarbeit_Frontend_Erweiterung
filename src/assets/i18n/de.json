@@ -150,6 +150,8 @@
     "functions": "Funktionen",
     "type": "Art",
     "orders": "Bestellungen",
-    "date": "Datum"
-
+    "date": "Datum",
+    "remove-checklist": "Checkliste löschen",
+    "remove-step": "Schritt löschen", 
+    "no-data": "Bisher keine Daten "
 }
